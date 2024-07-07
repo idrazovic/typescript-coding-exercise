@@ -69,7 +69,7 @@ openapi.yaml
 ## Run instructions
 
 - Backend: `cd backend && npm install && npm run build && npm run start`
-- Frontend: `cd frontend && npm install && npm run serve`
+- Frontend: `cd frontend && npm install && npm run start`
 - API: `openapi.yaml` file contains the API definition.
 - Access the frontend at `http://localhost:4200`.
 - Access the backend at `http://localhost:3000`.
