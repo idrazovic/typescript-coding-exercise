@@ -3,12 +3,14 @@ import fs from "fs";
 
 import { NextFunction, Request, Response } from "express";
 
-
 import { Message } from "../models/message";
+import { handleError } from "../util/errorHandler";
+
+const filePath = path.join(__dirname, '..', 'data', 'data.json');
 
 const getMessages = (req: Request, res: Response, next: NextFunction) => {
     try {
-        fs.readFile(path.join(__dirname, '..', 'data', 'data.json'), 'utf-8', (err, data) => {
+        fs.readFile(filePath, 'utf-8', (err, data) => {
             if (err) {
                 throw err;
             }
@@ -21,7 +23,7 @@ const getMessages = (req: Request, res: Response, next: NextFunction) => {
             res.status(200).json({ messages: JSON.parse(data) });
         })
     } catch (error) {
-        throw error;
+        handleError(error, next);
     }
 };
 
@@ -33,14 +35,14 @@ const postMessage = async (req: Request, res: Response, next: NextFunction) => {
             user: 'admin',
             timestamp: new Date().toISOString()
         }
-        fs.readFile(path.join(__dirname, '..', 'data', 'data.json'), 'utf-8', (err, data) => {
+        fs.readFile(filePath, 'utf-8', (err, data) => {
             if (err) {
                 throw err;
             }
 
             const messages = JSON.parse(data ? data : '[]');
             messages.push(message);
-            fs.writeFile(path.join(__dirname, '..', 'data', 'data.json'), JSON.stringify(messages), err => {
+            fs.writeFile(filePath, JSON.stringify(messages), err => {
                 if (err) {
                     throw err;
                 }
@@ -49,7 +51,7 @@ const postMessage = async (req: Request, res: Response, next: NextFunction) => {
             })
         })
     } catch (error) {
-        throw error;
+        handleError(error, next);
     }
 }
 

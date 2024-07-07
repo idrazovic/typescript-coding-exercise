@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from "body-parser";
 
 import messagesRoutes from './routes/messages';
+import { ErrorMessage } from './models/error-message';
 
 const app = express();
 
@@ -24,9 +25,11 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to backend');
 });
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(500).send('Internal Server Error');
+app.use((error: ErrorMessage, req: Request, res: Response, next: NextFunction) => {
+    console.log(error);
+    const status = error.statusCode || 500;
+    const message = error.message;
+    res.status(status).json({ message: message });
 });
 
 app.listen(port, () => {
