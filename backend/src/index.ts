@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
+import bodyParser from "body-parser";
 
 import messagesRoutes from './routes/messages';
 
@@ -8,8 +9,10 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+app.use(bodyParser.json());
+
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();

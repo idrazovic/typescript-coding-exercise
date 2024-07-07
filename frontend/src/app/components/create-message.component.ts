@@ -9,7 +9,6 @@ import { MessageComponent } from "./message.component";
 @Component({
     selector: 'app-create-message',
     standalone: true,
-    providers: [MessageService],
     imports: [
         ReactiveFormsModule,
         FormsModule,
@@ -19,7 +18,7 @@ import { MessageComponent } from "./message.component";
     ],
     template: `
     <div *ngIf="! message.empty()">
-      <app-massage [message]="message" no="preview"></app-massage>
+      <app-message [message]="message" no="preview"></app-message>
     </div>
     <form (ngSubmit)="onSubmit()">
       <label class="mt-4">
@@ -38,20 +37,12 @@ import { MessageComponent } from "./message.component";
 })
 export class CreateMessageComponent {
     message: Message = new Message('', 'draft');
-    private messageService: MessageService;
 
-    constructor(messageService: MessageService) {
-        this.messageService = messageService;
-    }
+    constructor(private messageService: MessageService) { }
 
     async onSubmit() {
         this.message.status = 'pending';
-        const res = await fetch('http://127.0.0.1:3000/messages/send', {
-            method: 'GET',
-            body: JSON.stringify({ text: this.message.text }),
-        });
-        res.status === 204 ? this.message.status = 'sent' : this.message.status = 'failed';
-        await this.messageService.add(this.message);
+        const res = await this.messageService.send(this.message.text);
         this.message = new Message('', 'draft');
     }
 }

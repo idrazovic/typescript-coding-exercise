@@ -2,7 +2,7 @@ import { Component, Input } from "@angular/core";
 import { NgClass } from "@angular/common";
 
 @Component({
-    selector: 'app-massage',
+    selector: 'app-message',
     standalone: true,
     template: `
     <div style="background-color: #fff;">

@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
-import { getMessages } from '../controllers/messages';
+import { getMessages, postMessage } from '../controllers/messages';
 
 const router = Router();
 
 router.get('/', getMessages);
+
+router.post('/', postMessage);
 
 export default router;
