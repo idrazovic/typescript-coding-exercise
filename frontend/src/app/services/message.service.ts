@@ -9,6 +9,7 @@ export class MessageService {
     private readonly baseUrl = 'http://127.0.0.1:3000/messages';
 
     private messages = signal<Message[]>([]);
+
     loadedMessages = this.messages.asReadonly();
 
     async all() {
@@ -25,7 +26,6 @@ export class MessageService {
             body: JSON.stringify({ text }),
         });
         const data: { message: Message } = await res.json();
-
         const messageStatus = res.status === 201 ? data.message.status = 'sent' : data.message.status = 'failed';
         const message = new Message(data.message.text, messageStatus)
         this.add(message);

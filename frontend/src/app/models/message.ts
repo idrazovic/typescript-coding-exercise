@@ -1,4 +1,9 @@
-export class Message {
+export interface MessageInterface {
+    text: string;
+    status: string;
+}
+
+export class Message implements MessageInterface {
     text;
     status: string;
     constructor(message: string, status: string) {
