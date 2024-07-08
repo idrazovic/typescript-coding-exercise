@@ -7,7 +7,7 @@ paths:
     get:
       summary: Get all messages
       responses:
-        '200':
+        "200":
           description: A list of messages
           content:
             application/json:
@@ -16,13 +16,18 @@ paths:
                 items:
                   type: object
                   properties:
-                    message:
+                    text:
                       type: string
                     user:
                       type: string
-                    timestamp:
+                    createdAt:
                       type: string
-  /messages:
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+        "500":
+          description: Internal server error
     post:
       summary: Send a new message
       requestBody:
@@ -32,12 +37,27 @@ paths:
             schema:
               type: object
               properties:
-                message:
-                  type: string
-                user:
+                text:
                   type: string
       responses:
-        '201':
+        "201":
           description: Message sent successfully
-        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  user:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+        "400":
           description: Bad request, invalid input
+        "500":
+          description: Internal server error

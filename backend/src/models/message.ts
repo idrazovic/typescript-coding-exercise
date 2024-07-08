@@ -11,9 +11,6 @@ const messageSchema = new Schema({
         ref: 'User',
         required: true
     },
-    status: {
-        type: String
-    },
 }, { timestamps: true });
 
 export const Message = mongoose.model('Message', messageSchema)
