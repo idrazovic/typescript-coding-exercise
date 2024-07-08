@@ -6,7 +6,7 @@ import messagesRoutes from './routes/messages';
 import usersRoutes from './routes/users';
 import { ErrorMessage } from './models/error-message';
 
-const MONGO_DB_URI = `mongodb+srv://idrazovic:g4MXcbLdFqK8V4PI@node-rest-api.axitvrv.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-api`;
+const MONGO_DB_URI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@node-rest-api.axitvrv.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-api`;
 
 const app = express();
 

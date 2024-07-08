@@ -24,11 +24,9 @@ export class SignupComponent {
 
     onSubmit() {
         if (this.signupForm.valid) {
-            console.log(this.signupForm.value);
             this.authService.signup(this.signupForm.value)
                 .subscribe({
                     next: (data: any) => {
-                        console.log(data);
                         this.router.navigate(['/login']);
                     },
                     error: (err) => console.log(err)

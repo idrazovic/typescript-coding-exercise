@@ -7,8 +7,6 @@ import { handleError } from "../util/errorHandler";
 import { User } from "../models/user";
 import { ErrorMessage } from "../models/error-message";
 
-const secret = 'somesupersecretsecret';
-
 const postUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const passwordHash = await bcrypt.hash(req.body.password, 12);
@@ -47,7 +45,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
                 email: user.email,
                 userId: user._id.toString()
             },
-            secret,
+            process.env.JWT_SECRET as string,
             { expiresIn: '1h' }
         );
 

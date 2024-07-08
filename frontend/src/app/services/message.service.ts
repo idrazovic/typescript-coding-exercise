@@ -32,7 +32,6 @@ export class MessageService {
             body: JSON.stringify({ text }),
         });
         const data: { message: MessageInterface } = await res.json();
-        console.log(data);
 
         const messageStatus = res.status === 201 ? data.message.status = 'sent' : data.message.status = 'failed';
         const message = new Message(data.message.text, messageStatus)
