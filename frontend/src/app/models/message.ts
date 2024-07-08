@@ -1,6 +1,7 @@
 export interface MessageInterface {
     text: string;
     status: string;
+    user?: string;
 }
 
 export class Message implements MessageInterface {

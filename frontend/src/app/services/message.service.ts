@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-import { Message } from '../models/message';
+import { Message, MessageInterface } from '../models/message';
 
 @Injectable({
     providedIn: 'root',
@@ -15,17 +15,25 @@ export class MessageService {
     async all() {
         const res = await fetch(this.baseUrl);
         const data: { messages: Message[] } = await res.json();
-        const messages = data.messages.map((message: any) => new Message(message.text, message.status));
+        const messages = data.messages.map((message: any) => {
+            const status = message.user === JSON.parse(localStorage.getItem('userId') as string) ? 'sent' : 'received';
+            return new Message(message.text, status)
+        });
         this.messages.set([...messages]);
     }
 
     async send(text: string) {
         const res = await fetch(this.baseUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token') as string),
+            },
             body: JSON.stringify({ text }),
         });
-        const data: { message: Message } = await res.json();
+        const data: { message: MessageInterface } = await res.json();
+        console.log(data);
+
         const messageStatus = res.status === 201 ? data.message.status = 'sent' : data.message.status = 'failed';
         const message = new Message(data.message.text, messageStatus)
         this.add(message);
