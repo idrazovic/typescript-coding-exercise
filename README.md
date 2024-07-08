@@ -77,6 +77,8 @@ openapi.yaml
 - Note: The project is set up to run on localhost by default
 
 
+## Igor's report
+
 ### Frontend changes
 1. Project Structure: Moved all components, services, and models from app.component.ts to their respectable files/folders. 
     - All components moved to the components/[name-of-the-component] folder
