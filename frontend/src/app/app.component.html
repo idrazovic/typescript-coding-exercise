@@ -1,0 +1,13 @@
+<div class="max-w-full mx-auto px-4">
+    <div class="header">
+        <a class="text-2xl px-4" routerLink="/chat">Chat App</a>
+        <div>
+            @if (this.authService.isLoggedIn()) {
+                <button class="ml-4" (click)="logout()">Logout</button>
+            } @else {
+                <button class="ml-4" routerLink="/login">Sign in</button>
+            }
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

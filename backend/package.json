@@ -9,7 +9,7 @@
     },
     "author": "Igor Drazovic",
     "license": "ISC",
-    "description": "Chat Messenger API for frontend",
+    "description": "Chat Messenger API",
     "devDependencies": {
         "@types/express": "^4.17.21",
         "@types/jsonwebtoken": "^9.0.6",

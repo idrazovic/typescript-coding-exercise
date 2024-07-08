@@ -1,12 +1,8 @@
-import path from "path";
-
 import { NextFunction, Request, Response } from "express";
 
 import { Message } from "../models/message";
 import { handleError } from "../util/errorHandler";
 import { CustomRequest } from "../models/custom-request";
-
-const filePath = path.join(__dirname, '..', 'data', 'data.json');
 
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
     try {

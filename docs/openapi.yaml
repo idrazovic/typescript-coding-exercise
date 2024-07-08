@@ -108,7 +108,7 @@ paths:
                 password:
                   type: string
       responses:
-        "200":
+        "201":
           description: Signup successful
           content:
             application/json:

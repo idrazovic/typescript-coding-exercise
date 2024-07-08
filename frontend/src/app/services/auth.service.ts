@@ -7,8 +7,8 @@ import { tap } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class AuthService {
-    private readonly baseUrl = 'http://127.0.0.1:3000';
     private readonly httpClient = inject(HttpClient);
+    private readonly baseUrl = 'http://127.0.0.1:3000';
 
     signup(data: any) {
         return this.httpClient.post(`${this.baseUrl}/auth/signup`, data);

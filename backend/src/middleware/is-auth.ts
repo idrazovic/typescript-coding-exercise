@@ -6,9 +6,6 @@ import { ErrorMessage } from "../models/error-message";
 import { CustomRequest } from "../models/custom-request";
 import { JWTPayload } from "../models/jwt-payload";
 
-const secret = 'somesupersecretsecret';
-
-
 const isAuth = async (req: CustomRequest, res: Response, next: NextFunction) => {
     let error: ErrorMessage;
 
@@ -23,7 +20,7 @@ const isAuth = async (req: CustomRequest, res: Response, next: NextFunction) => 
     let decodedToken: string | jwt.JwtPayload;
     try {
 
-        decodedToken = jwt.verify(token, secret);
+        decodedToken = jwt.verify(token, process.env.JWT_SECRET as string);
 
         if (!decodedToken) {
             error = new Error('Not authenticated');

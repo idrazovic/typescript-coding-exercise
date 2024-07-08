@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Message, MessageInterface } from '../models/message';
 
@@ -6,6 +7,8 @@ import { Message, MessageInterface } from '../models/message';
     providedIn: 'root',
 })
 export class MessageService {
+    httpClient = inject(HttpClient);
+    
     private readonly baseUrl = 'http://127.0.0.1:3000/messages';
 
     private messages = signal<Message[]>([]);

@@ -32,14 +32,14 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
             const error: ErrorMessage = new Error('Invalid email or password');
-            error.statusCode = 401;
+            error.statusCode = 400;
             throw error;
         }
 
         const doMatch = await bcrypt.compare(req.body.password, user.password);
         if (!doMatch) {
             const error: ErrorMessage = new Error('Invalid email or password');
-            error.statusCode = 401;
+            error.statusCode = 400;
             throw error;
         }
 
@@ -49,7 +49,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
                 userId: user._id.toString()
             },
             process.env.JWT_SECRET as string,
-            { expiresIn: '1h' }
+            { expiresIn: process.env.JWT_EXPIRES_IN }
         );
 
         res.status(200).json({ token, userId: user._id.toString() });
