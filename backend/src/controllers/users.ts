@@ -18,7 +18,10 @@ const postUser = async (req: Request, res: Response, next: NextFunction) => {
 
         const data = await user.save();
 
-        res.status(201).json({ data });
+        res.status(201).json({ 
+            name: data.name,
+            email: data.email
+         });
     } catch (error) {
         handleError(error, next);
     }

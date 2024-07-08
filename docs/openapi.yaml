@@ -61,3 +61,65 @@ paths:
           description: Bad request, invalid input
         "500":
           description: Internal server error
+  /auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string 
+                  userId:
+                    type: string
+        "400":
+          description: Bad request, invalid input
+        "500":
+          description: Internal server error
+  /auth/signup:
+    post:
+      summary: Signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Signup successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string 
+                  email:
+                    type: string
+        "400":
+          description: Bad request, invalid input
+        "500":
+          description: Internal server error
