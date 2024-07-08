@@ -68,7 +68,7 @@ openapi.yaml
 
 ## Run instructions
 
-- !!! Before running backend copy variables from email that has been sent to HR team member(s) into .env file that needs to be created on the same level as .env.examle file
+- !!! Before running backend create .env file from .env.example file
 - Backend: `cd backend && npm install && npm run start`
 - Frontend: `cd frontend && npm install && npm run start`
 - API: `openapi.yaml` file contains the API definition.
@@ -134,3 +134,5 @@ It would be nice to introduce interceptors and attach a JWT token to each authen
 12. Chatbot is something that I did not add yet. Since the time for completing the assignment ran out and it seems very interesting (I have never implemented it before) I will add it after you review my assignment.
 
 13. The OpenAPI yml file has been updated to reflect the current backend status.
+
+14. Secrets from .env.example file would be removed in a real life situation. 
